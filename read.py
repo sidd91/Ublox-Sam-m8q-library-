@@ -24,15 +24,23 @@ class GGAEnum(Enum):
 def utctocurrent_tmzone(LOCAL_TIMEZONE):
     pass
 
-def parselatandlong(Longitude, Long_dir, Lat, Lat_dir):
+def parselatandlong(Long, Long_dir, Lat, Lat_dir):
+    '''Lattitude format is in ddss.sssss '''
+    dd= int(float(Lat)/100)
+    ss=float(Lat)-float(dd*100)
+    Lat=dd+ss/60
+
+    #calculation for latitude
+    ddd= int(float(Long)/100)
+    ss=float(Long)-ddd*100
+    Long=ddd+ss/60
+
     if Lat_dir == "S":
-        Lat = -1 * float(Lat) /100
-    else:
-        Lat=float(Lat)/100
+        Lat = -1 * float(Lat)
+
     if Long_dir == "W":
-        Long = -1 * float(Longitude) /100
-    else:
-        Long= float(Long)/100
+        Long = -1 * float(Long)
+
     return Lat, Long
 
 def parseGGA(inputGGA):
@@ -47,8 +55,8 @@ def parseGGA(inputGGA):
         Lat, Long= parselatandlong(Long, Long_dir, Lat, Lat_dir)
         print("Lat= ",Lat,"and Long= ", Long)
         print("Number of satellites", GGA[GGAEnum.numberofsatellites.value])
-        #findplace(Lat, Long)
-        findplace(37.331149, -121.874717) 
+        findplace(Lat, Long)
+        #findplace(37.331149, -121.874717) 
 
 def findplace(Lat, Long):
     g=geocoder.mapquest([Lat,Long], method='reverse' , key= API_KEY)
@@ -67,10 +75,10 @@ ser = serial.Serial(
 
 while 1:
     x=ser.readline()
-    #print(x)
+   #print(x)
     x= x.decode("utf-8") 
     if 'GNGGA' in x:
         parseGGA(x)
-        
+
 
 
