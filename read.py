@@ -1,15 +1,14 @@
- #!/usr/bin/env python
-
-          
-      
 import time
 import serial
 import datetime
 import geocoder
 from enum import Enum
+import sys
+import os
+
 
 GGA=[]
-LOCAL_TIMEZONE = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
+#LOCAL_TIMEZONE = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
 API_KEY= 'UwKcPqj3bzhx3USXvFRHA9GsTkO9hWWa'
 
 class GGAEnum(Enum):
@@ -62,9 +61,10 @@ def findplace(Lat, Long):
     g=geocoder.mapquest([Lat,Long], method='reverse' , key= API_KEY)
     print("Place= ", g)
 
+device_file = sys.argv[1]
 ser = serial.Serial(
    
-    port='/dev/ttyS0',
+    port=device_file,
     baudrate = 9600,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
@@ -74,11 +74,13 @@ ser = serial.Serial(
 
 
 while 1:
+    #os.system("sudo cat " + device_file)
     x=ser.readline()
-   #print(x)
-    x= x.decode("utf-8") 
+    print(x)
+    x= x.decode("utf-8",errors='ignore')
     if 'GNGGA' in x:
-        parseGGA(x)
+        pass
+        #parseGGA(x)
 
 
 
