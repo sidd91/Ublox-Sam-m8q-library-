@@ -1,0 +1,23 @@
+
+#General References
+
+https://www.rapidtables.com/convert/number/degrees-to-degrees-minutes-seconds.html
+https://en.wikipedia.org/wiki/Geotagging
+https://www.latlong.net/
+
+#Library documentation
+
+https://piexif.readthedocs.io/en/latest/functions.html#dump
+https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
+https://piexif.readthedocs.io/en/latest/appendices.html
+
+#Exif data parsing and format references
+
+http://www.ridgesolutions.ie/index.php/2015/03/05/geotag-exif-gps-latitude-field-format/
+https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
+https://gis.stackexchange.com/questions/136925/how-to-parse-exif-gps-information-to-lat-lng-decimal-numberis
+
+
+#To test the geotagged image, check the website below
+
+https://www.geoimgr.com/
