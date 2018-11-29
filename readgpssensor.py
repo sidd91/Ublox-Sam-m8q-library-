@@ -9,7 +9,7 @@ import os
 
 GGA=[]
 #LOCAL_TIMEZONE = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
-API_KEY= 'UwKcPqj3bzhx3USXvFRHA9GsTkO9hWWa'
+API_KEY= 'xxxxxxxxx' #Add Mapquest API here
 
 class GGAEnum(Enum):
     UTCtime=1
@@ -28,7 +28,7 @@ def parselatandlong(Long, Long_dir, Lat, Lat_dir):
     dd= int(float(Lat)/100)
     ss=float(Lat)-float(dd*100)
     Lat=dd+ss/60
-
+    print(dd,ss,Lat)
     #calculation for latitude
     ddd= int(float(Long)/100)
     ss=float(Long)-ddd*100
@@ -74,13 +74,9 @@ ser = serial.Serial(
 
 
 while 1:
-    #os.system("sudo cat " + device_file)
     x=ser.readline()
-    print(x)
+    #print(x)
     x= x.decode("utf-8",errors='ignore')
     if 'GNGGA' in x:
-        pass
-        #parseGGA(x)
-
-
+        parseGGA(x)
 
