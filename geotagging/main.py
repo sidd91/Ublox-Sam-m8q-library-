@@ -1,3 +1,9 @@
+#Author:Siddharth Chawla
+#Revision: v0
+#About: This file calls read.py and geotagging.py which initializes the uart interface for the UBlox SAM-M8Q GPS sensor and embeds location in .jpg files 
+
+
+
 import io 
 from PIL import Image
 import piexif

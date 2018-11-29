@@ -1,3 +1,8 @@
+#Author: Siddharth Chawla
+#revision: 0.1 
+#About me: Library for reading and parsing the gps sensor values. Platfrom ran on= Raspberrypi, Nvidia TX2 
+#Comments: This is a revised version which is more of a library which the geotaggin.py uses
+
 import time
 import serial
 import datetime
@@ -8,8 +13,7 @@ import os
 
 
 GGA=[]
-#LOCAL_TIMEZONE = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
-API_KEY= 'UwKcPqj3bzhx3USXvFRHA9GsTkO9hWWa'
+API_KEY= 'xxxxxxxxxxx' #Add Mapquest API key here
 
 class GGAEnum(Enum):
     UTCtime=1
@@ -20,12 +24,8 @@ class GGAEnum(Enum):
     Fixquality=6
     numberofsatellites=7
 
-def utctocurrent_tmzone(LOCAL_TIMEZONE):
-    pass
 
 def getlongandlat_in_degrees(Long,Lat):
-    
-
     dd= int(float(Lat)/100)
     ss=float(Lat)-float(dd*100)
     Lat=dd+ss/60 
@@ -49,7 +49,6 @@ def parselatandlong(Long, Long_dir, Lat, Lat_dir):
     ddd= int(float(Long)/100)
     ss=float(Long)-ddd*100
     Long=ddd+ss/60
-
     if Lat_dir == "S":
         Lat = -1 * float(Lat)
 
@@ -71,8 +70,6 @@ def parseGGA(inputGGA):
         print("Number of satellites", GGA[GGAEnum.numberofsatellites.value])
         #Lat, Long= parselatandlong(Long, Long_dir, Lat, Lat_dir)
         return {'Long':Long,'Long_ref':Long_dir,'Lat':Lat, 'Lat_ref':Lat_dir}
-        #findplace(Lat, Long)
-        #findplace(37.331149, -121.874717) 
 
 def findplace(Lat, Long):
     g=geocoder.mapquest([Lat,Long], method='reverse' , key= API_KEY)
@@ -92,9 +89,9 @@ def init(dev):
     )
     return ser
 
-ser= init(sys.argv[1])
 
 def main():
+    ser= init(sys.argv[1])
     while 1:
       x=ser.readline()
       #print(x)

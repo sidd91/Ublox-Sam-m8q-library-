@@ -1,4 +1,7 @@
-#https://gis.stackexchange.com/questions/136925/how-to-parse-exif-gps-information-to-lat-lng-decimal-numberis
+#Author: Siddharth Chawla
+#Revision: v0.0 replaces editImage.py 
+#About: Embeds exif data(GPS specifically) in images
+
 import io 
 from PIL import Image
 import piexif
