@@ -6,8 +6,14 @@ This repo involves reading the values from Ublox sam m8q gps sensor and provides
 
  
 #### About the hardware
-  
-#### readgpssensor.py reads the NMEA messages from the UART gps sensor
+
+#### Files breakdown
+
+readgpssensor.py reads the NMEA messages from the UART gps sensor
+
+geotagging.py is a library of functions, facilitating applications such as embedding **gps exif data** in an image
+
+main.py initializes the uart through read.py and embeds location in an image by using geotagging.py
 
 #### Pinout NVIDIA TX2(to do)
 
