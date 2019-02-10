@@ -17,9 +17,6 @@ from camera import Camera
 import cv2
 import os
 
-device = "\dev\ttyTHS2"
-frame = gt.geotag(device)
-print(type(frame))
 py_major_version = sys.version_info[0]
 
 print("Geotagging starts")
@@ -37,13 +34,15 @@ mapfile = mmap.mmap(memory.fd, memory.size)
 ## interfering with the mmap.
 memory.close_fd()
 
-print(semaphore.value)
-semaphore.acquire()
-print(frame.size, frame.mode)
-image_to_be_written = frame.tobytes()
-frame.show()
-print(len(image_to_be_written))
-utils.write_to_memory(mapfile, image_to_be_written)
-semaphore.release()
+device = "\dev\ttyTHS2"
+while 1: 
+    frame = gt.geotag(device)
+    semaphore.acquire()
+    #print(frame.size, frame.mode)
+    image_to_be_written = frame.tobytes()
+    #frame.show()
+    #print(len(image_to_be_written))
+    utils.write_to_memory(mapfile, image_to_be_written)
+    semaphore.release()
 
 

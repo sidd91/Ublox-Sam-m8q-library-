@@ -47,7 +47,7 @@ class Camera:
         ret, frame = self.cap.read()
         print "Capture Time: ", time.time() - capture_time
         if showImage:
-            show_image(frame, windowName)
+            self.show_image(frame, windowName)
         write_time = time.time()
         if fileName:
             cv2.imwrite(fileName, frame) 

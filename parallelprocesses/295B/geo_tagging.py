@@ -4,7 +4,7 @@
 #This file calls read.py and geotagging.py which initializes the uart interface for the UBlox SAM-M8Q GPS sensor and embeds location in .jpg files 
 
 
-
+import numpy as np
 import io 
 from PIL import Image
 import piexif
@@ -26,15 +26,24 @@ if(not os.path.exists(PATH)):
 
 image_width = 1280
 image_height = 720
-video_dev = 1
+video_dev = 0
 
 cam = Camera(image_height, image_width)
 cam.cap = cv2.VideoCapture(video_dev)
+#cam.open_cam_usb(video_dev)
 if not cam.cap.isOpened():
     sys.exit(1)
 
 frame = cam.capture_image()
+frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 frame = Image.fromarray(frame) #convert opencv image to PIL image
+
+#open_cv_image = np.array(frame)
+#image = open_cv_image[:, :, ::-1].copy()
+#cv2.imshow('title',image)
+#cv2.waitKey()    
+
+#frame.show()
 
 def geotag(uartdevice):
     ser= gt.initialize_uart(uartdevice)
