@@ -30,11 +30,17 @@ video_dev = 1
 
 cam = Camera(image_height, image_width)
 cam.cap = cv2.VideoCapture(video_dev)
+#cam.open_cam_usb(video_dev)
 if not cam.cap.isOpened():
+    print("hi")
     sys.exit(1)
 
 frame = cam.capture_image()
+frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#cv2.imshow('jai',frame)
+cv2.waitKey()
 frame = Image.fromarray(frame) #convert opencv image to PIL image
+frame.show()
 
 def geotag(uartdevice):
     ser= gt.initialize_uart(uartdevice)
